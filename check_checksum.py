@@ -3,6 +3,7 @@ import os
 from typing import Union
 
 
+# Read input file and add name, algorithm and checksum in dictionary. If input file or path doesn't exist raise an error
 def read_input_file(path_input_file: str) -> dict:
     input_files = {}
     try:
@@ -17,7 +18,8 @@ def read_input_file(path_input_file: str) -> dict:
         )
 
 
-def hash_sum(data: bytes, algorithm: str) -> Union[str, None]:
+# Computing checksum and return. If algorithm doesn't approach return None
+def checksum(data: bytes, algorithm: str) -> Union[str, None]:
     if algorithm == "md5":
         return hashlib.md5(data).hexdigest()
     elif algorithm == "sha1":
@@ -28,12 +30,13 @@ def hash_sum(data: bytes, algorithm: str) -> Union[str, None]:
         return None
 
 
-def check_hash_sum(path_input_file: str, dir_file: str):
+# Function returns OK if checksum is the same. It returns FAIL if checksum is different or not such algorithm. If file doesn't exist function returns NOT FOUND
+def check_checksum(path_input_file: str, dir_file: str):
     for key, value in read_input_file(path_input_file).items():
         file_path = os.path.join(dir_file, key)
         try:
             with open(file_path, "rb") as data:
-                if hash_sum(data.read(), value[0]) == value[1]:
+                if checksum(data.read(), value[0]) == value[1]:
                     print(key, "OK")
                 else:
                     print(key, "FAIL")
@@ -44,4 +47,4 @@ def check_hash_sum(path_input_file: str, dir_file: str):
 if __name__ == "__main__":
     path_input_file = input("Enter path to the input file: ")
     dir_file = input("Enter path to the directory containing the files to check: ")
-    check_hash_sum(path_input_file, dir_file)
+    check_checksum(path_input_file, dir_file)
