@@ -1,5 +1,6 @@
 import hashlib
 import os
+from typing import Union
 
 
 def read_input_file(path_input_file: str) -> dict:
@@ -16,7 +17,7 @@ def read_input_file(path_input_file: str) -> dict:
         )
 
 
-def hash_sum(data: bytes, algorithm: str) -> str:
+def hash_sum(data: bytes, algorithm: str) -> Union[str, None]:
     if algorithm == "md5":
         return hashlib.md5(data).hexdigest()
     elif algorithm == "sha1":
