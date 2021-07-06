@@ -15,7 +15,9 @@
 
 Пример вызова: 
 
-> <your program> <path to the input file> <path to the directory containing the files to check>
+``` 
+<your program> <path to the input file> <path to the directory containing the files to check> 
+```
  
 Формат вывода:
 > file_01.bin OK
