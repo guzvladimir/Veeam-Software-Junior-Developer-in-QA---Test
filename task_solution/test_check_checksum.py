@@ -1,5 +1,4 @@
 import pytest
-
 from check_checksum import check_checksum, checksum
 
 
